@@ -19,20 +19,24 @@ def bissecao(fx,xl,xu,tol,maxit=100):
     i = 0 
     residuo = residuo_abs(fx,xm)
     print("Residuo: ",residuo)
-
-    while (residuo > tol and i < maxit):
+    print(f"xm = {xm}")
+    print(f"fm = {fm}")
+    while (abs(xu-xl) > tol and i < maxit):
         if fl * fm > 0:
             xl = xm
             fl = fm
         else: 
             xu = xm
             fu = fm
+        
+
         xm = (xl+xu)/2
         fm = fx(xm)
         residuo = residuo_abs(fx,xm)
         i += 1
         print("Residuo: ",residuo)
-
+        print(f"xm = {xm}")
+        print(f"fm = {fm}")
     print("Quantidade de Iterações: ",i+1)
     return xm   
 

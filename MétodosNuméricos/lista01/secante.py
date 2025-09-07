@@ -13,64 +13,65 @@ def dx_convencional(xl,xu,f):
 def dx_centrada(x,delta,f):
     return (f(x+delta)-f(x-delta))/(2*delta)
 
-def metodo_secante(x0,x1,f,tol=1e-06,maxit=1000):
-    xl = x0
-    fl = f(xl)
-    if (abs(fl) < tol):
-        return xl
+
+def secante_convencional(f, x_anterior,  x_atual, tol=1e-08, maxit=1000):
+    x = x_atual
+    x_ant = x_anterior
     
-    xu = x1
-    fu = f(xu)
-    if (abs(fu) < tol): 
-        return xu
-    
-    x = (xu+xl)/2
     fx = f(x)
-
-    i = 0
-    print(f"Iteração={i}, x={x}, fx={fx}")
+    fx_ant = f(x_ant)
     
-    print(f"Residuo {residuo_abs(fx)}, Desvio: {desvio_abs(xu,xl)}")
-
-    while (abs(fx) > tol and i < maxit):
-        dx = dx_convencional(xl,xu,f)
-        x = x - (fx/dx)
-        fx = f(x)
-        i += 1
-        print(f"\nIteração={i}, x={x}, fx={fx}")
-        print(f"Residuo {residuo_abs(fx)}, Desvio: {desvio_abs(xu,xl)}")
-        xl, xu = xu, x 
-    return x
-
-
-
-def metodo_secante_centrada(x0,delta,f,tol=1e-06,maxit=1000):
-    x = x0
-    fx = f(x)
-    if (abs(fx) < tol):
+    if (fx < tol): 
         return x
-
+    #dx = (fx-fx_ant)/(x-x_ant)
     i = 0
-    print("Iteração= ", i, " x= ", x, " fx= ", fx)
-    print(f"Residuo {residuo_abs(fx)}")
 
+    #print("\nIteração= ", i, "; x= ", x, " fx= ", fx)
+    print(f"Residuo {residuo_abs(fx)}")
     while (abs(fx) > tol and i < maxit):
-        dx = dx_centrada(x,delta,f)
-        x_0 = x
+        print(f"Iteração={i}; x={x}; fx={fx}")
+        
+        aux = x
+        dx = (fx-fx_ant)/(x-x_ant)
+        #x = x - ((fx*(x-x_ant))/(fx-fx_ant))
         x = x - (fx/dx)
+        x_ant = aux
+
         fx = f(x)
+        fx_ant = f(x_ant)
         i += 1
-        print("\nIteração= ", i, " x= ", x, " fx= ", fx)
-        print(f"Residuo {residuo_abs(fx)}, Desvio: {desvio_abs(x,x0)}")
+
+        #if abs(fx) < tol:
+            #return x
+        print(f"\nDesvio: {desvio_abs(x,x_ant)}; Residuo: {residuo_abs(fx)},")
 
     return x
 
 
+def secante_dif_centrada(f, x, delta, tol=1e-03, maxit=1000):
+    fx = f(x)
+    if (fx < tol): 
+        return x
+    i = 0
 
+    print(f"Residuo {residuo_abs(fx)}")
+    while (abs(fx) > tol and i < maxit):
+        print(f"Iteração={i}; x={x}; fx={fx}")
+        x_ant = x
+        dx = (f(x + delta) - f(x - delta))/(2*delta)
+        x = x - (fx/dx)
+        fx = f(x)
+
+        i+= 1
+        print(f"\nDesvio: {desvio_abs(x,x_ant)}; Residuo: {residuo_abs(fx)},")
+    return x
 
 f = lambda x: x - 5 * (math.e**(-x**2)) + 4 
-print("a)Empregando a aproximação da derivada 'convencional':")
-x = metodo_secante(x0=-1.4,x1=1.5,f=f)
-
-print("\nb)Empregando a aproximação da derivada baseada em diferenças centradas:")
-x = metodo_secante_centrada(x0=2.0,delta=0.01,f=f)
+print("\na)Empregando a aproximação da derivada 'convencional':\n")
+#x = metodo_secante(x00=-1.4,x01=1.5,f=f)
+x = secante_convencional(f=f,x_anterior=-1.5,x_atual=-1.4)
+print(x)
+print()
+print("-"*80,"\nb)Empregando a aproximação da derivada baseada em diferenças centradas:")
+x = secante_dif_centrada(f=f,x=2.0,delta=0.01)
+print(x)

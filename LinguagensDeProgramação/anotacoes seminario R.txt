@@ -1,0 +1,79 @@
+linguagem r 
+opensource, desevolvida em C e Fortran
+
+ctrl L limpa o console
+pacotes
+
+<- atribuição
+c() concatenação
+
+seja var uma variável qualquer
+
+length(var)
+min(var)
+max(var)
+mean(var)
+
+barplot(var) ----- gráfico
+
+summary(var)
+
+x^y   #x elevado a y equivalente a: `^`(x,y)
+x%%y  #resto da divisão de x por y
+x%/%   #divisão inteira de x por y
+sqrt(var)   #raiz quadrada de var
+factorial(var)
+abs(var)     #modulo
+log(x,y)   #log de x na base y
+PEMDAS --Ordem de execução:
+Parênteses, Exponenciação, Multiplicação, Divisão, Adição e Subtração
+
+variáveis só podem ter letras, números, . ou _, sem espaços, sem se chamar com um nome reservado, não pode começar com números.
+
+
+a <- b <- c <- 0       as 3 variáveis ficam com 0
+
+rm(var)      apaga a variável
+ls()         mostra todas as variáveis existentes
+rm(list = ls())   apaga todas as variáveis do global environment
+
+round(var,digits=x) #var com x casas decimais
+signif(var,digits=x) #var com x x dígitos
+floor(var)   #arredonda p baixo em inteiro
+ceiling(var) #arredonda p cima em inteiro
+trunc(var)   #não necessariamente arredonda, apenas retira as casas decimais
+
+
+typeof(var) #retorna o tipo da variável 
+
+x <- 10 #"double"
+
+y <- 10L #"integer"
+
+z <- 3 + 4i   # "complex"
+
+"aaaaa1343"     #  "character" 
+
+"logical":
+TRUE ou T
+FALSE ou F    
+
+
+
+paste(x,y)    #converte x e y em caracteres, concatenam ambos com um espaço entre eles. Pode concatenar mais de duas variáveis...
+
+& AND
+| OU
+
+var <- readline("Digite: ...") #input, atribui var como caractere 
+print(var)
+
+
+x <- as.integer(var) #converte para inteiro
+
+== #igual a 
+!= #diferente de
+> #maior que
+< #menor que
+>= #maior ou igual a
+<= #menor ou igual a
