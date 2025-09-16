@@ -1,0 +1,109 @@
+##usar no terminal: 
+ghci nome-arquivo.hs
+-- chamar função
+factorial 5
+
+
+---- O que vale pra array também vale para "":
+
+5:[1,2,3,4,5]    ->  [5,1,2,3,4,5]
+'A': " Small Cat" -> "A Small Cat"
+
+#Concatenação
+"hello " ++ "world" -> "hello world"
+
+##pegar pelo indice [] !! i ou "" !! i
+head []    -> primeiro elemento
+tail []    -> array sem o primeiro elemento
+last []    -> ultimo elemento do array
+init []    -> array/ sem o ultimo elemento
+
+
+-- length []
+-- null []   -> True se null, False se nao
+-- reverse [] -> [] ao contrario
+
+-- take i []   -> pega os i primeiros elementos
+-- drop i []   -> pega os i ultimos elementos
+
+-- maximum []
+-- minimum []
+-- sum []      -> soma todos os elementos
+-- product []  -> multiplica todos os elementos
+
+-- x `elem` []  -> x pertence a [] True, ou False
+
+####Arrays
+-- [1..20]    -> [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+-- ['a'..'z']     -> "abcdefghijklmnopqrstuvwxyz"  
+-- ['K'..'Z']     -> "KLMNOPQRSTUVWXYZ"   
+-- [2,4..20]      -> [2,4,6,8,10,12,14,16,18,20]
+-- [20,19..1]     -> [20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+-- [0.1, 0.3 .. 1]  -> [0.1,0.3,0.5,0.7,0.8999999999999999,1.0999999999999999]  
+
+-- take i (cycle [])   -> cycle faz a lista ser infinita, repetindo a sequencia
+-- take 10 (repeat x)  -> uma lista só do elemento (se for um array faz uma matriz com varios arrays)
+
+
+
+--  [x*2 | x <- [1..10]]       -> p todo x entre [1,10] multiplica por 2
+-- [x*2 | x <- [1..10], x*2 >= 12]  -> [12,14,16,18,20] para todo x*2 que for >= 12
+-- [ x | x <- [50..100], x `mod` 7 == 3]  -> [52,59,66,73,80,87,94] (numeros entre 50 e 100 que divindo por 7 o resto é 3)
+
+
+-- odd x     -> x é impar true
+-- x /= y    -> diferente
+
+-- tupla: 
+    -- ja sei a quantidade de elementos, mas podem ser de diferentes tipos
+    -- fst (,) pega o primeiro elemento de um par na tupla
+    -- snd (,) pega o segundo elemento de um par na tupla
+    -- zip [] [] retorna tuplas com i elemento de cada lista combinando com o i da outra lista
+    
+
+
+
+--Seja var uma variavel
+:t var ## retorna tipo
+    ghci>:t "Amanda"
+    "Amanda" :: String
+    
+    ghci>:t ['a', 'b']
+    ['a', 'b'] :: [Char]
+
+--GT, LT, EQ
+Ao usar x `compare` y, podemos obter 3 respostas:
+    GT, greater than
+    LT, lesser than
+    EQ, equal
+
+--show var #Converte para String
+--read "" #Le [Char] em forma de variavel de outro tipo, tem que estar acompanhada de uma expressao
+    Ex:
+        read "8.2" + 3.8  
+        read "[1,2,3,4]" ++ [3]  
+        read "5" : Float ###5.0
+    
+-- minBound :: tipo  ##retorna o limite minimo do tipo
+-- maxBound :: tipo  ##retorna o limite maximo do tipo
+
+
+
+-- let <bindings> in <expression>   ##nomes definidos em let sao usados em in
+        4 * (let a = 9 in a + 1) + 2  ## 4 * (9 + 1 )   + 2
+        
+        ghci> [let square x = x * x in (square 5, square 3, square 2)]  
+        [(25,9,4)]
+
+        ghci> (let a = 100; b = 200; c = 300 in a*b*c, let foo="Hey "; bar = "there!" in foo ++ bar)  
+        (6000000,"Hey there!")    
+
+
+-- tratamento de erro
+    head' [] = error "No head for empty lists!"  
+
+
+
+case expression of pattern -> result  
+                   pattern -> result  
+                   pattern -> result 
